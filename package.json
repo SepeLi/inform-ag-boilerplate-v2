@@ -2,7 +2,10 @@
   "name": "@inform-ag-boilerplate-v2/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "commit": "npx git-cz",
+    "dev": "npx nx dev pump-master"
+  },
   "private": true,
   "dependencies": {
     "next": "~15.2.4",
@@ -10,6 +13,8 @@
     "react-dom": "19.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
     "@eslint/compat": "^1.1.1",
     "@eslint/eslintrc": "^2.1.1",
     "@eslint/js": "^9.8.0",
@@ -21,6 +26,9 @@
     "@nx/js": "21.2.2",
     "@nx/next": "21.2.2",
     "@nx/playwright": "21.2.2",
+    "@nx/react": "21.2.2",
+    "@nx/vite": "21.2.2",
+    "@nx/web": "21.2.2",
     "@nx/workspace": "21.2.2",
     "@playwright/test": "^1.36.0",
     "@swc-node/register": "~1.9.1",
@@ -30,9 +38,13 @@
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.1.0",
     "@types/jest": "^29.5.12",
-    "@types/node": "18.16.9",
+    "@types/node": "^20.0.0",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "@vitest/coverage-v8": "^3.0.5",
+    "@vitest/ui": "^3.0.0",
+    "ajv": "^8.0.0",
     "babel-jest": "^29.7.0",
     "eslint": "^9.8.0",
     "eslint-config-next": "^15.2.4",
@@ -44,15 +56,21 @@
     "eslint-plugin-react-hooks": "5.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "jiti": "2.4.2",
+    "jsdom": "~22.1.0",
     "nx": "21.2.2",
     "prettier": "^2.6.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
     "typescript": "~5.8.2",
-    "typescript-eslint": "^8.29.0"
+    "typescript-eslint": "^8.29.0",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "~4.5.0",
+    "vitest": "^3.0.0"
   },
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "libs/*"
   ]
 }

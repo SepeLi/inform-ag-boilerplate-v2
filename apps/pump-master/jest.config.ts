@@ -6,7 +6,7 @@ const createJestConfig = nextJest({
 });
 
 const config: Config = {
-  displayName: '@inform-ag-boilerplate-v2/pump-master',
+  displayName: 'pump-master',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',

@@ -8,6 +8,18 @@
     },
     {
       "path": "./apps/pump-master"
+    },
+    {
+      "path": "./libs/ui"
+    },
+    {
+      "path": "./libs/procedures"
+    },
+    {
+      "path": "./libs/server"
+    },
+    {
+      "path": "./apps/pump-master-e2e"
     }
   ]
 }

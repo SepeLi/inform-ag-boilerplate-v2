@@ -1,10 +1,10 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import Page from '../app/page';
 
-describe('Page', () => {
+import Procedures from './procedures';
+
+describe('Procedures', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Page />);
+    const { baseElement } = render(<Procedures />);
     expect(baseElement).toBeTruthy();
   });
 });

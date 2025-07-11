@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
     "composite": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
@@ -16,6 +18,13 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["development"]
+    "customConditions": ["development"],
+    "paths": {
+      "@inform-ag-boilerplate/procedures": ["libs/procedures/src/index.ts"],
+      "@inform-ag-boilerplate/server": ["libs/server/src/index.ts"],
+      "@inform-ag-boilerplate/server/*": ["libs/server/src/*"],
+      "@inform-ag-boilerplate/ui": ["libs/ui/src/index.ts"],
+      "@inform-ag-boilerplate/ui/*": ["libs/ui/src/*"]
+    }
   }
 }

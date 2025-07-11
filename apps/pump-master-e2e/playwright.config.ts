@@ -24,7 +24,7 @@ export default defineConfig({
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npx nx run @inform-ag-boilerplate-v2/pump-master:start',
+    command: 'npx nx run pump-master:start',
     url: 'http://localhost:3000',
     reuseExistingServer: true,
     cwd: workspaceRoot,

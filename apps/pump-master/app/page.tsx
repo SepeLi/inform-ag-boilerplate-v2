@@ -1,4 +1,5 @@
 import styles from './page.module.css';
+import { Ui } from '@inform-ag-boilerplate-v2/ui';
 
 export default function Index() {
   /*
@@ -13,7 +14,8 @@ export default function Index() {
           <div id="welcome">
             <h1>
               <span> Hello there, </span>
-              Welcome @inform-ag-boilerplate-v2/pump-master 👋
+              <Ui />
+              Welcome pump-master 👋
             </h1>
           </div>
 
@@ -397,9 +399,7 @@ export default function Index() {
                 </svg>
                 View project details
               </summary>
-              <pre>
-                nx show project @inform-ag-boilerplate-v2/pump-master --web
-              </pre>
+              <pre>nx show project pump-master --web</pre>
             </details>
             <details>
               <summary>

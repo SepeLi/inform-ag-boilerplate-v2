@@ -1,10 +1,5 @@
 {
-  "name": "@inform-ag-boilerplate-v2/pump-master-e2e",
+  "name": "pump-master-e2e",
   "version": "0.0.1",
-  "private": true,
-  "nx": {
-    "implicitDependencies": [
-      "@inform-ag-boilerplate-v2/pump-master"
-    ]
-  }
+  "private": true
 }
