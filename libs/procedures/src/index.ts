@@ -1,1 +1,1 @@
-export * from './lib/procedures';
+export * from './services';

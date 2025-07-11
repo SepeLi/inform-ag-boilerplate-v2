@@ -8,10 +8,10 @@
       "@nx/react/typings/image.d.ts",
       "vite/client"
     ],
-    "rootDir": "src",
     "jsx": "react-jsx",
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo"
   },
+  "references": [{ "path": "../procedures" }],
   "exclude": [
     "out-tsc",
     "dist",
