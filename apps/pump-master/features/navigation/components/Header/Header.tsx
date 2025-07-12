@@ -17,7 +17,7 @@ export const Header = () => {
         style={{ color: 'inherit' }}
         onClick={() => router.push('/')}
       >
-        Pump Master
+        {process.env.NEXT_PUBLIC_APP_NAME || 'PumpMaster'}
       </button>
       {isAuthenticated && (
         <div className="d-flex align-items-center">

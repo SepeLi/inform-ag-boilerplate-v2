@@ -5,6 +5,8 @@
   "scripts": {
     "commit": "npx git-cz",
     "dev": "npx nx dev pump-master",
+    "build": "npx nx build pump-master --skip-nx-cache",
+    "test": "npx nx test pump-master --skip-nx-cache",
     "storybook": "npx nx storybook ui"
   },
   "private": true,

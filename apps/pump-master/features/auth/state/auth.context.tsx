@@ -2,8 +2,9 @@
 
 import { RootState } from '../../../store';
 import { FC, ReactNode, createContext, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { usePathname, useRouter } from 'next/navigation';
+import { logout, refreshSession } from './authSlice';
 
 export interface AuthContextProps {
   logout: () => void;
@@ -17,17 +18,37 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
+const EXPIRE_TIME =
+  (Number(process.env.NEXT_PUBLIC_SESSION_EXPIRY_HOURS) || 1) * 60 * 60 * 1000;
+
 const AuthGuard = ({ children }: { children: ReactNode }) => {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
+  const dispatch = useDispatch();
+  const auth = useSelector((state: RootState) => state.auth);
+  const { _persistedAt: persistedAt, isAuthenticated } = auth;
   const router = useRouter();
   const pathname = usePathname();
+
+  // Hybrid expiry check: on every route change, check if session expired
+  useEffect(() => {
+    if (isAuthenticated && persistedAt) {
+      const expired = Date.now() - persistedAt > EXPIRE_TIME;
+      if (expired) {
+        dispatch(logout());
+      }
+    }
+  }, [pathname, isAuthenticated, persistedAt, dispatch]);
+
   useEffect(() => {
     if (!isAuthenticated && pathname !== '/login') {
       router.replace('/login');
     }
   }, [isAuthenticated, pathname, router]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(refreshSession());
+    }
+  }, [pathname, isAuthenticated, dispatch]);
 
   if (!isAuthenticated && pathname !== '/login') {
     return (
