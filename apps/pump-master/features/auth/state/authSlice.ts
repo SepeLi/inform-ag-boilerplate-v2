@@ -14,6 +14,7 @@ const initialState: AuthState = {
   token: null,
   isAuthenticated: false,
 };
+export const authInitialState = initialState;
 
 const authSlice = createSlice({
   name: 'auth',
@@ -32,6 +33,7 @@ const authSlice = createSlice({
     logout(state) {
       state.user = null;
       state.token = null;
+      state.jwt = undefined;
       state.isAuthenticated = false;
     },
   },

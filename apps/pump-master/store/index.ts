@@ -1,5 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import authReducer from '../features/auth/state/authSlice';
+import authReducer, {
+  authInitialState,
+} from '../features/auth/state/authSlice';
 import pumpReducer from '../features/pumps/state/pumpSlice';
 import {
   persistStore,
@@ -12,16 +14,49 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { createTransform } from 'redux-persist';
 
-const rootReducer = combineReducers({
-  auth: authReducer,
-  pump: pumpReducer,
-});
+// Expiration time in ms (e.g., 1 hour)
+const EXPIRE_TIME = 60 * 60 * 1000;
+
+const expireTransform = createTransform(
+  // inbound: add timestamp
+  (inboundState, key) => {
+    return { ...(inboundState || {}), _persistedAt: Date.now() };
+  },
+  // outbound: check expiration
+  (outboundState, key) => {
+    if (key !== 'auth' || !outboundState || typeof outboundState !== 'object')
+      return authInitialState;
+    if (!('_persistedAt' in outboundState) || !outboundState._persistedAt)
+      return outboundState;
+    const expired = Date.now() - outboundState._persistedAt > EXPIRE_TIME;
+    if (expired) {
+      return authInitialState;
+    }
+    return { ...outboundState };
+  },
+  { whitelist: ['auth'] }
+);
+
+const rootReducer = (state: any, action: any) => {
+  return combineReducers({
+    auth: authReducer,
+    pump: pumpReducer,
+  })(
+    {
+      auth: state?.auth ?? authInitialState,
+      pump: state?.pump ?? undefined,
+    },
+    action
+  );
+};
 
 const persistConfig = {
   key: 'root',
   storage,
   whitelist: ['auth'], // only persist auth slice
+  transforms: [expireTransform],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
