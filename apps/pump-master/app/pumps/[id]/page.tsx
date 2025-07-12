@@ -5,6 +5,8 @@ import {
   Provider as TRPCProvider,
 } from '@inform-ag-boilerplate-v2/server';
 import { FC } from 'react';
+// import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps';
+// import Image from 'next/image';
 
 const PumpDetailComponent: FC = () => {
   const params = useParams();
@@ -72,39 +74,27 @@ const PumpDetailComponent: FC = () => {
       </table>
       <h4>Map</h4>
       <div
-        style={{
-          width: '100%',
-          height: 300,
-          background: '#e6f0f7',
-          borderRadius: 12,
-          marginBottom: 32,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        className="w-100 mb-4 rounded bg-info bg-opacity-10 d-flex align-items-center justify-content-center"
+        style={{ height: 300 }}
       >
+        {/* How to implement map with google maps api:
+        https://visgl.github.io/react-google-maps/docs/get-started
+        <AdvancedMarker position={pointToLatLng(point)}>
+          <Image src={MapMarker} alt="Map marker" width={32} height={32} />
+        </AdvancedMarker> */}
         <span>Map Placeholder</span>
       </div>
       <h4>Pressure Over Time</h4>
       <div className="mb-2">
-        <span style={{ fontSize: 32, fontWeight: 600 }}>
-          {pump.currentPressure}
-        </span>{' '}
+        <span className="fw-semibold display-6">{pump.currentPressure}</span>{' '}
         <span>PSI</span>
         <div>
-          Last 24 Hours <span style={{ color: '#16a34a' }}>+5%</span>
+          Last 24 Hours <span className="text-success">+5%</span>
         </div>
       </div>
       <div
-        style={{
-          width: '100%',
-          height: 180,
-          background: '#f8fafc',
-          borderRadius: 12,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        className="w-100 rounded bg-light d-flex align-items-center justify-content-center"
+        style={{ height: 180 }}
       >
         <span>Chart Placeholder</span>
       </div>

@@ -6,7 +6,7 @@ import {
   updatePump,
   deletePump,
   getPumpById,
-} from '@inform-ag-boilerplate/procedures';
+} from '@inform-ag-boilerplate-v2/procedures';
 
 const pumpSchema = z.object({
   id: z.string(),

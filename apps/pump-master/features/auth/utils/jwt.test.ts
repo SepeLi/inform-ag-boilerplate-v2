@@ -1,4 +1,4 @@
-import { parseJwt } from '@/auth/utils';
+import { parseJwt } from './jwt';
 
 describe('JWT utils', () => {
   const token =
@@ -11,7 +11,7 @@ describe('JWT utils', () => {
       expect(payload).toEqual({
         sub: '1234567890',
         name: 'John Doe',
-        iat: 1516239022
+        iat: 1516239022,
       });
     });
 

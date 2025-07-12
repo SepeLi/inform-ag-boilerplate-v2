@@ -39,7 +39,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       style={{ maxWidth: 400, margin: '0 auto' }}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className="text-center mb-4">Welcome back</h2>
+      <h2 className="text-center mb-4">Welcome to Pump Master</h2>
       <div className="mb-3">
         <label className="form-label">Username</label>
         <Input

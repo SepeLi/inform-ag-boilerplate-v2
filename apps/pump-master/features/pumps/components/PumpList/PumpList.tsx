@@ -11,13 +11,27 @@ import { setPumps, setPumpLoading, setPumpError } from '../../state/pumpSlice';
 import { Input, Button, Modal } from '@inform-ag-boilerplate-v2/ui';
 import { useRouter } from 'next/navigation';
 
+interface Pump {
+  id: string;
+  name: string;
+  type: string;
+  area: string;
+  latitude: number;
+  longitude: number;
+  flowRate: string;
+  offset: string;
+  currentPressure: string;
+  minPressure: string;
+  maxPressure: string;
+}
+
 const PumpListComponent = () => {
   const dispatch = useDispatch();
   const { pumps, loading, error } = useSelector(
     (state: RootState) => state.pump
   );
   const [search, setSearch] = useState('');
-  const [editPump, setEditPump] = useState<any | null>(null);
+  const [editPump, setEditPump] = useState<Pump | null>(null);
   const [editName, setEditName] = useState('');
   const [editType, setEditType] = useState('');
   const [editArea, setEditArea] = useState('');
@@ -27,8 +41,12 @@ const PumpListComponent = () => {
   const [filterCurrentPressure, setFilterCurrentPressure] = useState('');
 
   // Get unique types and areas for dropdowns
-  const uniqueTypes = Array.from(new Set(pumps.map((p) => p.type)));
-  const uniqueAreas = Array.from(new Set(pumps.map((p) => p.area)));
+  const uniqueTypes: string[] = Array.from(
+    new Set((pumps as Pump[]).map((p: Pump) => p.type))
+  );
+  const uniqueAreas: string[] = Array.from(
+    new Set((pumps as Pump[]).map((p: Pump) => p.area))
+  );
 
   const getAllPumps = trpc.pumps.getAllPumps.useQuery(undefined, {
     enabled: false,
@@ -53,7 +71,7 @@ const PumpListComponent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const filteredPumps = pumps.filter((pump) => {
+  const filteredPumps: Pump[] = (pumps as Pump[]).filter((pump: Pump) => {
     const matchesSearch =
       pump.name.toLowerCase().includes(search.toLowerCase()) ||
       pump.type.toLowerCase().includes(search.toLowerCase()) ||
@@ -78,7 +96,7 @@ const PumpListComponent = () => {
   });
 
   // Open modal and set initial values
-  const handleEdit = (pump: any) => {
+  const handleEdit = (pump: Pump) => {
     setEditPump(pump);
     setEditName(pump.name);
     setEditType(pump.type);
@@ -88,7 +106,7 @@ const PumpListComponent = () => {
   // Save changes and call tRPC mutation
   const handleSave = async () => {
     if (!editPump) return;
-    const updatedPump = {
+    const updatedPump: Pump = {
       ...editPump,
       name: editName,
       type: editType,
@@ -125,7 +143,7 @@ const PumpListComponent = () => {
           onChange={(e) => setFilterType(e.target.value)}
         >
           <option value="">All Types</option>
-          {uniqueTypes.map((type) => (
+          {uniqueTypes.map((type: string) => (
             <option key={type} value={type}>
               {type}
             </option>
@@ -137,7 +155,7 @@ const PumpListComponent = () => {
           onChange={(e) => setFilterArea(e.target.value)}
         >
           <option value="">All Areas</option>
-          {uniqueAreas.map((area) => (
+          {uniqueAreas.map((area: string) => (
             <option key={area} value={area}>
               {area}
             </option>
@@ -170,7 +188,7 @@ const PumpListComponent = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredPumps.map((pump) => (
+          {filteredPumps.map((pump: Pump) => (
             <tr key={pump.id}>
               <td>{pump.name}</td>
               <td>{pump.type}</td>

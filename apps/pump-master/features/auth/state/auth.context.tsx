@@ -1,10 +1,8 @@
 'use client';
 
 import { RootState } from '../../../store';
-import { logout } from './authSlice';
 import { FC, ReactNode, createContext, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { usePathname, useRouter } from 'next/navigation';
 
 export interface AuthContextProps {
@@ -30,6 +28,7 @@ const AuthGuard = ({ children }: { children: ReactNode }) => {
       router.replace('/login');
     }
   }, [isAuthenticated, pathname, router]);
+
   if (!isAuthenticated && pathname !== '/login') {
     return (
       <div
@@ -45,9 +44,9 @@ const AuthGuard = ({ children }: { children: ReactNode }) => {
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   // const [, , removeCookie] = useCookies(['jwt']);
-  const { user } = useSelector(({ auth }: RootState) => auth);
+  // const { user } = useSelector(({ auth }: RootState) => auth);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const logout = async () => {
     // removeCookie('jwt', {

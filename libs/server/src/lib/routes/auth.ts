@@ -3,7 +3,7 @@ import { publicProcedure, router } from '../trpc';
 import {
   loginValidation,
   registerValidation,
-} from '@inform-ag-boilerplate/procedures';
+} from '@inform-ag-boilerplate-v2/procedures';
 
 export const authRouter = router({
   login: publicProcedure
