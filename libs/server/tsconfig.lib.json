@@ -11,7 +11,11 @@
     "jsx": "react-jsx",
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo"
   },
-  "references": [{ "path": "../procedures" }],
+  "references": [
+    {
+      "path": "../procedures/tsconfig.lib.json"
+    }
+  ],
   "exclude": [
     "out-tsc",
     "dist",

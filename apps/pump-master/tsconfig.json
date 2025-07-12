@@ -37,7 +37,14 @@
     "store/**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "references": [{ "path": "../../libs/server" }],
+  "references": [
+    {
+      "path": "../../libs/ui"
+    },
+    {
+      "path": "../../libs/server"
+    }
+  ],
   "exclude": [
     "out-tsc",
     "dist",
