@@ -9,6 +9,7 @@ import {
 import { RootState } from '../../../../store';
 import { setPumps, setPumpLoading, setPumpError } from '../../state/pumpSlice';
 import { Input, Button, Modal } from '@inform-ag-boilerplate-v2/ui';
+import { useRouter } from 'next/navigation';
 
 const PumpListComponent = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const PumpListComponent = () => {
     enabled: false,
   });
   const updatePumpMutation = trpc.pumps.updatePump.useMutation();
+  const router = useRouter();
 
   useEffect(() => {
     dispatch(setPumpLoading(true));
@@ -176,6 +178,14 @@ const PumpListComponent = () => {
               <td>{pump.flowRate}</td>
               <td>{pump.currentPressure}</td>
               <td>
+                <Button
+                  size="sm"
+                  variant="primary"
+                  className="me-2"
+                  onClick={() => router.push(`/pumps/${pump.id}`)}
+                >
+                  View
+                </Button>
                 <Button
                   size="sm"
                   variant="secondary"
