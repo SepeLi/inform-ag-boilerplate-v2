@@ -1,4 +1,5 @@
-import { createContext, appRouter } from '@inform-ag-boilerplate/server';
+import { createContext } from '@inform-ag-boilerplate/server/lib/context';
+import { appRouter } from '@inform-ag-boilerplate/server/lib/router';
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
 import { TRPCRequestInfo } from '@trpc/server/unstable-core-do-not-import';
 
