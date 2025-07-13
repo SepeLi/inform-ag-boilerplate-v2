@@ -5,4 +5,5 @@ test('has title', async ({ page }) => {
 
   // Expect h1 to contain a substring.
   expect(await page.locator('h1').innerText()).toContain('PumpMaster');
+  expect(await page.locator('h2').innerText()).toContain('Pump Master');
 });

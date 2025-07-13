@@ -24,7 +24,8 @@
       "@inform-ag-boilerplate-v2/server": ["libs/server/src/index.ts"],
       "@inform-ag-boilerplate-v2/server/*": ["libs/server/src/*"],
       "@inform-ag-boilerplate-v2/ui": ["libs/ui/src/index.ts"],
-      "@inform-ag-boilerplate-v2/ui/*": ["libs/ui/src/*"]
+      "@inform-ag-boilerplate-v2/ui/*": ["libs/ui/src/*"],
+      "@inform-ag-boilerplate-v2/utils": ["libs/utils/src/index.ts"]
     }
   }
 }

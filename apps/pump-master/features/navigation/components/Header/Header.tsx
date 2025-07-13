@@ -12,13 +12,13 @@ export const Header = () => {
   );
   return (
     <header className="d-flex align-items-center justify-content-between px-4 py-2 border-bottom mb-4">
-      <button
+      <a
         className="btn btn-link m-0 p-0 text-decoration-none fs-3 fw-bold"
         style={{ color: 'inherit' }}
         onClick={() => router.push('/')}
       >
-        {process.env.NEXT_PUBLIC_APP_NAME || 'PumpMaster'}
-      </button>
+        <h1>{process.env.NEXT_PUBLIC_APP_NAME || 'PumpMaster'}</h1>
+      </a>
       {isAuthenticated && (
         <div className="d-flex align-items-center">
           <PumpsButton />

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { parseJwt } from '../utils';
+import { parseJwt } from '@inform-ag-boilerplate-v2/utils';
 
 interface AuthState {
   jwt?: string;

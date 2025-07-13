@@ -1,4 +1,5 @@
 import { parseJwt } from './jwt';
+import { describe, it, expect, vi } from 'vitest';
 
 describe('JWT utils', () => {
   const token =
@@ -30,18 +31,20 @@ describe('JWT utils', () => {
   });
 
   it('does not log a warning for a valid token', () => {
-    const consoleWarn = jest.spyOn(console, 'warn');
+    const consoleWarn = vi.spyOn(console, 'warn');
     const token =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MTYyMzkwMjJ9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
     parseJwt(token);
 
     expect(consoleWarn).not.toHaveBeenCalled();
+    consoleWarn.mockRestore();
   });
 
   it('logs a warning for an invalid token', () => {
-    const consoleWarn = jest.spyOn(console, 'warn');
+    const consoleWarn = vi.spyOn(console, 'warn');
     parseJwt('invalid.token');
 
     expect(consoleWarn).toHaveBeenCalled();
+    consoleWarn.mockRestore();
   });
 });

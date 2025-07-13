@@ -19,7 +19,7 @@
       "path": "./libs/server"
     },
     {
-      "path": "./apps/pump-master-e2e"
+      "path": "./libs/utils"
     }
   ],
   "ts-node": {
