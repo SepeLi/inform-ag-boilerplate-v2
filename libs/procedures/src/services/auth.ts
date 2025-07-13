@@ -4,7 +4,12 @@ export const loginValidation = async ({
   input: { email: string; password: string };
 }) => {
   // TODO: Replace with real authentication logic
-  if (input.email === 'atester.lee@gmail.com' && input.password === '1234567') {
+  const TEST_USER_EMAIL = process.env.TEST_USER_EMAIL || '';
+  const TEST_USER_PASSWORD = process.env.TEST_USER_PASSWORD || '';
+  if (
+    input.email === TEST_USER_EMAIL &&
+    input.password === TEST_USER_PASSWORD
+  ) {
     return { success: true, token: process.env.JWT_SECRET };
   }
   throw new Error('Invalid credentials');
@@ -15,7 +20,6 @@ export const registerValidation = async ({
 }: {
   input: { email: string; password: string; confirmPassword: string };
 }) => {
-  // Example: check if passwords match
   if (input.password !== input.confirmPassword) {
     throw new Error('Passwords do not match');
   }

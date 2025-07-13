@@ -18,7 +18,6 @@ export const LoginComponent = () => {
   const loginMutation = trpc.auth.login.useMutation();
   const router = useRouter();
 
-  // Redirect after successful login
   useEffect(() => {
     if (isAuthenticated) {
       router.push('/');
@@ -36,7 +35,10 @@ export const LoginComponent = () => {
         password: values.password,
       });
       dispatch(
-        setAuth({ user: { email: values.username }, token: result.token })
+        setAuth({
+          user: { email: values.username },
+          token: result.token || '',
+        })
       );
     } catch (err: any) {
       setError(err.message || 'Login failed');

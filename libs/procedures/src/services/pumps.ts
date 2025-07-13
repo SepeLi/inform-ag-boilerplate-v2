@@ -7,11 +7,11 @@ let pumps = [
     area: 'Area A',
     latitude: 34.0522,
     longitude: -118.2437,
-    flowRate: '1000 GPM',
-    offset: '5 sec',
-    currentPressure: '150 psi',
-    minPressure: '120 psi',
-    maxPressure: '180 psi',
+    flowRate: 1000,
+    offset: 5,
+    currentPressure: 150,
+    minPressure: 120,
+    maxPressure: 180,
   },
   {
     id: '2',
@@ -20,11 +20,11 @@ let pumps = [
     area: 'Area B',
     latitude: 34.0522,
     longitude: -118.2437,
-    flowRate: '800 GPM',
-    offset: '3 sec',
-    currentPressure: '130 psi',
-    minPressure: '100 psi',
-    maxPressure: '160 psi',
+    flowRate: 800,
+    offset: 3,
+    currentPressure: 130,
+    minPressure: 100,
+    maxPressure: 160,
   },
 ];
 
@@ -34,16 +34,16 @@ export type PumpData = {
   area: string;
   latitude: number;
   longitude: number;
-  flowRate: string;
-  offset: string;
-  currentPressure: string;
-  minPressure: string;
-  maxPressure: string;
+  flowRate: number;
+  offset: number;
+  currentPressure: number;
+  minPressure: number;
+  maxPressure: number;
 };
 
 export type Pump = PumpData & { id: string };
 
-export const getPumps = () => pumps;
+export const getAllPumps = () => pumps;
 
 export const createPump = (input: PumpData) => {
   const newPump = { ...input, id: (Date.now() + Math.random()).toString() };

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { publicProcedure, router } from '../trpc';
 import {
-  getPumps,
+  getAllPumps,
   createPump,
   updatePump,
   deletePump,
@@ -15,15 +15,15 @@ const pumpSchema = z.object({
   area: z.string(),
   latitude: z.number(),
   longitude: z.number(),
-  flowRate: z.string(),
-  offset: z.string(),
-  currentPressure: z.string(),
-  minPressure: z.string(),
-  maxPressure: z.string(),
+  flowRate: z.number(),
+  offset: z.number(),
+  currentPressure: z.number(),
+  minPressure: z.number(),
+  maxPressure: z.number(),
 });
 
 export const pumpRouter = router({
-  getAllPumps: publicProcedure.query(() => getPumps()),
+  getAllPumps: publicProcedure.query(() => getAllPumps()),
   createPump: publicProcedure
     .input(pumpSchema.omit({ id: true }))
     .mutation(({ input }) => createPump(input)),

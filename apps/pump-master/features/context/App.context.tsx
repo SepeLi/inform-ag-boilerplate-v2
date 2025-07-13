@@ -1,6 +1,6 @@
 'use client';
 
-import { AuthProvider } from '../auth/state/auth.context';
+import { AuthProvider } from '../auth/context/auth.context';
 import { SSRBlocker } from './SSRBlocker/SSRBlocker';
 import { Provider } from 'react-redux';
 import { store, persistor } from '../../store';

@@ -1,18 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface Pump {
-  id: string;
-  name: string;
-  type: string;
-  area: string;
-  latitude: number;
-  longitude: number;
-  flowRate: string;
-  offset: string;
-  currentPressure: string;
-  minPressure: string;
-  maxPressure: string;
-}
+import { Pump } from '@inform-ag-boilerplate-v2/procedures';
 
 interface PumpState {
   pumps: Pump[];

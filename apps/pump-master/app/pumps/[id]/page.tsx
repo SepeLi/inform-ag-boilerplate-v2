@@ -29,13 +29,19 @@ const PumpDetailComponent: FC = () => {
       <div className="d-flex justify-content-between align-items-center mb-3">
         <div>
           <div>
-            <strong>Pump ID</strong>: {pump.id}
+            <span>
+              <strong>Pump ID</strong>: {pump.id}
+            </span>
           </div>
           <div>
-            <strong>Status</strong>: Operational
+            <span>
+              <strong>Status</strong>: Operational
+            </span>
           </div>
           <div>
-            <strong>Last Updated</strong>: 2024-01-20 14:30
+            <span>
+              <strong>Last Updated</strong>: 2024-01-20 14:30
+            </span>
           </div>
         </div>
       </div>
@@ -58,16 +64,17 @@ const PumpDetailComponent: FC = () => {
           </tr>
           <tr>
             <td>Flow Rate</td>
-            <td>{pump.flowRate}</td>
+            <td>{pump.flowRate} GPM</td>
           </tr>
           <tr>
             <td>Offset</td>
-            <td>{pump.offset}</td>
+            <td>{pump.offset} sec</td>
           </tr>
           <tr>
             <td>Pressure (Current | Min | Max)</td>
             <td>
-              {pump.currentPressure} | {pump.minPressure} | {pump.maxPressure}
+              {pump.currentPressure} psi | {pump.minPressure} psi |{' '}
+              {pump.maxPressure} psi
             </td>
           </tr>
         </tbody>
@@ -86,7 +93,9 @@ const PumpDetailComponent: FC = () => {
       </div>
       <h4>Pressure Over Time</h4>
       <div className="mb-2">
-        <span className="fw-semibold display-6">{pump.currentPressure}</span>{' '}
+        <span className="fw-semibold display-6">
+          {pump.currentPressure} psi
+        </span>{' '}
         <span>PSI</span>
         <div>
           Last 24 Hours <span className="text-success">+5%</span>

@@ -29,14 +29,13 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isAuthenticated = true;
-      state._persistedAt = Date.now(); // ensure _persistedAt is set on login
+      state._persistedAt = Date.now();
     },
     logout(state) {
       state.user = null;
       state.token = null;
       state.jwt = undefined;
       state.isAuthenticated = false;
-      // do not touch _persistedAt
     },
     refreshSession(state) {
       state._persistedAt = Date.now();

@@ -39,6 +39,9 @@
   ],
   "references": [
     {
+      "path": "../../libs/procedures"
+    },
+    {
       "path": "../../libs/ui"
     },
     {

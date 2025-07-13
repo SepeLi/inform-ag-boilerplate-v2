@@ -10,20 +10,7 @@ import { RootState } from '../../../../store';
 import { setPumps, setPumpLoading, setPumpError } from '../../state/pumpSlice';
 import { Input, Button, Modal } from '@inform-ag-boilerplate-v2/ui';
 import { useRouter } from 'next/navigation';
-
-interface Pump {
-  id: string;
-  name: string;
-  type: string;
-  area: string;
-  latitude: number;
-  longitude: number;
-  flowRate: string;
-  offset: string;
-  currentPressure: string;
-  minPressure: string;
-  maxPressure: string;
-}
+import { Pump } from '@inform-ag-boilerplate-v2/procedures';
 
 const PumpListComponent = () => {
   const dispatch = useDispatch();
@@ -40,12 +27,11 @@ const PumpListComponent = () => {
   const [filterFlowRate, setFilterFlowRate] = useState('');
   const [filterCurrentPressure, setFilterCurrentPressure] = useState('');
 
-  // Get unique types and areas for dropdowns
   const uniqueTypes: string[] = Array.from(
-    new Set((pumps as Pump[]).map((p: Pump) => p.type))
+    new Set(pumps.map((p: Pump) => p.type))
   );
   const uniqueAreas: string[] = Array.from(
-    new Set((pumps as Pump[]).map((p: Pump) => p.area))
+    new Set(pumps.map((p: Pump) => p.area))
   );
 
   const getAllPumps = trpc.pumps.getAllPumps.useQuery(undefined, {
@@ -71,20 +57,19 @@ const PumpListComponent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const filteredPumps: Pump[] = (pumps as Pump[]).filter((pump: Pump) => {
+  const filteredPumps: Pump[] = pumps.filter((pump: Pump) => {
     const matchesSearch =
       pump.name.toLowerCase().includes(search.toLowerCase()) ||
       pump.type.toLowerCase().includes(search.toLowerCase()) ||
       pump.area.toLowerCase().includes(search.toLowerCase());
     const matchesType = filterType ? pump.type === filterType : true;
     const matchesArea = filterArea ? pump.area === filterArea : true;
-    const matchesFlowRate = filterFlowRate
-      ? pump.flowRate.toLowerCase().includes(filterFlowRate.toLowerCase())
-      : true;
+    const matchesFlowRate =
+      filterFlowRate && !isNaN(Number(filterFlowRate))
+        ? Number(pump.flowRate) >= Number(filterFlowRate)
+        : true;
     const matchesCurrentPressure = filterCurrentPressure
-      ? pump.currentPressure
-          .toLowerCase()
-          .includes(filterCurrentPressure.toLowerCase())
+      ? Number(pump.currentPressure) === Number(filterCurrentPressure)
       : true;
     return (
       matchesSearch &&
@@ -95,7 +80,6 @@ const PumpListComponent = () => {
     );
   });
 
-  // Open modal and set initial values
   const handleEdit = (pump: Pump) => {
     setEditPump(pump);
     setEditName(pump.name);
@@ -103,7 +87,6 @@ const PumpListComponent = () => {
     setEditArea(pump.area);
   };
 
-  // Save changes and call tRPC mutation
   const handleSave = async () => {
     if (!editPump) return;
     const updatedPump: Pump = {
@@ -164,7 +147,7 @@ const PumpListComponent = () => {
         <Input
           value={filterFlowRate}
           onChange={(e) => setFilterFlowRate(e.target.value)}
-          placeholder="Flow Rate"
+          placeholder="Flow Rate Greater Than..."
           className="ms-2"
         />
         <Input
@@ -193,8 +176,8 @@ const PumpListComponent = () => {
               <td>{pump.name}</td>
               <td>{pump.type}</td>
               <td>{pump.area}</td>
-              <td>{pump.flowRate}</td>
-              <td>{pump.currentPressure}</td>
+              <td>{pump.flowRate} GPM</td>
+              <td>{pump.currentPressure} psi</td>
               <td>
                 <Button
                   size="sm"

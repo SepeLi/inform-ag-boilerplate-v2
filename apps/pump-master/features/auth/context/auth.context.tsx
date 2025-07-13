@@ -4,7 +4,7 @@ import { RootState } from '../../../store';
 import { FC, ReactNode, createContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePathname, useRouter } from 'next/navigation';
-import { logout, refreshSession } from './authSlice';
+import { logout, refreshSession } from '../state/authSlice';
 
 export interface AuthContextProps {
   logout: () => void;
@@ -28,27 +28,27 @@ const AuthGuard = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Hybrid expiry check: on every route change, check if session expired
   useEffect(() => {
+    // 1. Check for session expiry
     if (isAuthenticated && persistedAt) {
       const expired = Date.now() - persistedAt > EXPIRE_TIME;
       if (expired) {
         dispatch(logout());
+        return;
       }
     }
-  }, [pathname, isAuthenticated, persistedAt, dispatch]);
 
-  useEffect(() => {
+    // 2. Redirect to login if not authenticated
     if (!isAuthenticated && pathname !== '/login') {
       router.replace('/login');
+      return;
     }
-  }, [isAuthenticated, pathname, router]);
 
-  useEffect(() => {
+    // 3. Refresh session if authenticated
     if (isAuthenticated) {
       dispatch(refreshSession());
     }
-  }, [pathname, isAuthenticated, dispatch]);
+  }, [pathname, isAuthenticated, persistedAt, dispatch, router]);
 
   if (!isAuthenticated && pathname !== '/login') {
     return (
